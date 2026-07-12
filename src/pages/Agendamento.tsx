@@ -19,11 +19,8 @@ export default function App() {
   useEffect(() => {
     async function buscarDados() {
       try {
-  // 1. O ID real da sua planilha nova que você gerou
   const ID_PLANILHA = "1ECT8ul3_JnDZKZLOMp6WMLTD2sw6iRXVyH1lt5qDaBs";
-  
   const resposta = await fetch(`https://docs.google.com/spreadsheets/d/${ID_PLANILHA}/export?format=csv&gid=0`);
-  
   const textocsv = await resposta.text();
   const linhas = textocsv.split('\n');
 
@@ -121,7 +118,6 @@ backgroundColor: "#0f0e0c",
         onChange={(e) => setNomeCliente(e.target.value)}
       />
 
-      {/* SEÇÃO DE SERVIÇOS */}
       <p style={{ fontWeight: 'bold', color: '#9CA3AF' }}>2. Selecione um serviço:</p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>
         {SERVICOS_MOCK.map((servico) => {
@@ -142,7 +138,6 @@ backgroundColor: "#0f0e0c",
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 transition: 'all 0.2s ease-in-out',
-                // AQUI APLICAMOS A COESÃO DE CORES DO TEMA ESCURO COM NEON CIANO:
                 backgroundColor: '#1E1E1E',
                 border: ehEsteServico ? '2px solid #462f0c' : '1px solid #2D2D2D',
                 boxShadow: ehEsteServico ? '0 0 12px rgba(119, 83, 42, 0.4)' : 'none',
@@ -160,8 +155,6 @@ backgroundColor: "#0f0e0c",
           );
         })}
       </div>
-
-      {/* SEÇÃO DE HORÁRIOS */}
       {servicoSelecionado && (
         <div style={{ marginTop: '30px' }}>
           <p style={{ fontWeight: 'bold', color: '#9CA3AF' }}>3. Escolha o horário para {servicoSelecionado.nome}:</p>
@@ -179,8 +172,6 @@ backgroundColor: "#0f0e0c",
                     fontWeight: 'bold',
                     transition: '0.2s',
                     cursor: horario.disponivel ? 'pointer' : 'not-allowed',
-                    
-                    // CORES DOS HORÁRIOS EM MODO ESCURO E AZUL NEON:
                     border: ehEsteHorario ? '1px solid #4e3d23' : '1px solid #2D2D2D',
                     backgroundColor: !horario.disponivel
                       ? '#161616'
@@ -204,8 +195,6 @@ backgroundColor: "#0f0e0c",
           </div>
         </div>
       )}
-
-      {/* BOTÃO DO WHATSAPP */}
       {horarioSelecionado && nomeCliente.trim() !== '' && (
         <button
           onClick={enviarPedidoWhatsapp}
