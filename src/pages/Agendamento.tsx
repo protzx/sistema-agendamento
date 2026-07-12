@@ -64,7 +64,7 @@ export default function App() {
   if (carregando) {
     return (
       <div style={{ backgroundColor: '#121212', minHeight: '100vh', padding: '20px', fontFamily: 'sans-serif', maxWidth: '450px', margin: '0 auto', color: '#B48464', borderRadius: '15px' }}>
-        <h1 style={{ textAlign: 'center', fontSize: '24px' }}>Agendamento Online 🗓️</h1>
+        <h1 style={{ textAlign: 'center', fontSize: '24px' }}>Agendamento Online</h1>
         <p style={{ textAlign: 'center', color: '#9CA3AF' }}>Carregando horários da nuvem...</p>
       </div>
     );
