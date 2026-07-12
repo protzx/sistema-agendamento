@@ -20,7 +20,7 @@ export default function App() {
     async function buscarDados() {
       try {
         
-        const resposta = await fetch('https://docs.google.com/spreadsheets/d/1ECT8ul3_JnDZKZLOMp6WMLTD2sw6iRXVyH1lt5qDaBs/edit?gid=0#gid=0');
+        const resposta = await fetch('https://docs.google.com/spreadsheets/d/1ECT8ul3_JnDZKZLOMp6WMLTD2sw6iRXVyH1lt5qDaBs/edit?usp=sharing');
         const textocsv = await resposta.text();
         const linhas = textocsv.split('\n');
 
