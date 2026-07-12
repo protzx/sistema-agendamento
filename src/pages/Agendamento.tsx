@@ -29,11 +29,11 @@ export default function App() {
           .filter(linha => linha.trim() !== '')
           .map((linha, index) => {
             const colunas = linha.split(',');
-
+const statusDisponivel = colunas[2]?.replace(/\r?\n|\r/g, "").trim().toUpperCase();
             return {
               id: index + 1,
               hora: colunas[1]?.trim(),
-              disponivel: colunas[2]?.trim().toUpperCase() === 'TRUE'
+              disponivel: statusDisponivel === 'TRUE'
             };
           });
 
