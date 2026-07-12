@@ -13,11 +13,13 @@ export default function App() {
   const [servicoSelecionado, setServicoSelecionado] = useState<Servico | null>(null);
   const [horarioSelecionado, setHorarioSelecionado] = useState<HorarioDisponivel | null>(null);
   const [nomeCliente, setNomeCliente] = useState<string>('');
+  const [atualizarAgenda, setAtualizarAgenda] = useState<boolean>(false);
+
 
   useEffect(() => {
     async function buscarDados() {
       try {
-        // LINK CORRIGIDO E LIMPO SEM BARRAS INVERTIDAS:
+        
         const resposta = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRk1F8zAZC_LAv1pY3rFshKoO7NGC5lvN_ECwTKvwJ90JCoy9SV-E_Tl35XsQsGwxk_Vbxq5YY1GWiu/pub?output=csv');
         const textocsv = await resposta.text();
         const linhas = textocsv.split('\n');
@@ -44,7 +46,7 @@ export default function App() {
     }
 
     buscarDados();
-  }, []);
+  }, [atualizarAgenda]);
 const URL_WEB_APP_GOOGLE = "https://script.google.com/macros/s/AKfycbwUUxj0irZxGxc4LzwNRBv21QTU_od1TUwcVnoCA97RUdaQ8N9rRQiBQyRozm1lrA4W/exec"
 const atualizarPlanilhaNa_Nuvem = async (horaEscolhida: string) => {
   try{ 
@@ -56,9 +58,10 @@ const atualizarPlanilhaNa_Nuvem = async (horaEscolhida: string) => {
     console.error("Erro ao tentar atualizar o status do horário na nuvem", erro)
   }
 }
-  const enviarPedidoWhatsapp = () => {
+  const enviarPedidoWhatsapp = async () => {
     if (!servicoSelecionado || !horarioSelecionado) return;
-atualizarPlanilhaNa_Nuvem(horarioSelecionado.hora);
+await atualizarPlanilhaNa_Nuvem(horarioSelecionado.hora);
+setAtualizarAgenda(prev => !prev);
     const numeroLoja = '5542999936768';
     const mensagem = `*Novo Agendamento!* 🗓️\n\n` +
       `• *Cliente:* ${nomeCliente}\n` +
