@@ -21,8 +21,8 @@ export default function App() {
       try {
         
        
-const ID_PLANILHA = "2PACX-1vRk1F8zAZC_LAv1pY3rFshKoO7NGC5lvN_ECwTKvwJ90JCoy9SV-E_Tl35XsQsGwxk_Vbxq5YY1GWiu";
-const resposta = await fetch(`https://docs.google.com/spreadsheets/d/${ID_PLANILHA}/export?format=csv&gid=0`);
+const ID_PLANILHA = `2PACX-1vRk1F8zAZC_LAv1pY3rFshKoO7NGC5lvN_ECwTKvwJ90JCoy9SV-E_Tl35XsQsGwxk_Vbxq5YY1GWiu`;
+const resposta = await fetch(`https://google.com${ID_PLANILHA}/export?format=csv&gid=0`);
         const textocsv = await resposta.text();
         const linhas = textocsv.split('\n');
 
