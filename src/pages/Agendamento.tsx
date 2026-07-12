@@ -19,28 +19,30 @@ export default function App() {
   useEffect(() => {
     async function buscarDados() {
       try {
-        
-       
-const ID_PLANILHA = `2PACX-1vRk1F8zAZC_LAv1pY3rFshKoO7NGC5lvN_ECwTKvwJ90JCoy9SV-E_Tl35XsQsGwxk_Vbxq5YY1GWiu`;
-const resposta = await fetch(`https://google.com${ID_PLANILHA}/export?format=csv&gid=0`);
-        const textocsv = await resposta.text();
-        const linhas = textocsv.split('\n');
+  // 1. O ID real da sua planilha nova que você gerou
+  const ID_PLANILHA = "1ECT8ul3_JnDZKZLOMp6WMLTD2sw6iRXVyH1lt5qDaBs";
+  
+  const resposta = await fetch(`https://docs.google.com/spreadsheets/d/${ID_PLANILHA}/export?format=csv&gid=0`);
+  
+  const textocsv = await resposta.text();
+  const linhas = textocsv.split('\n');
 
-        const dadosFormatados: HorarioDisponivel[] = linhas
-          .slice(1)
-          .filter(linha => linha.trim() !== '')
-          .map((linha, index) => {
-            const colunas = linha.split(',');
-const statusDisponivel = colunas[2]?.replace(/\r?\n|\r/g, "").trim().toUpperCase();
-            return {
-              id: index + 1,
-              hora: colunas[1]?.trim(),
-              disponivel: statusDisponivel === 'TRUE'
-            };
-          });
+  const dadosFormatados: HorarioDisponivel[] = linhas
+    .slice(1)
+    .filter(linha => linha.trim() !== '')
+    .map((linha, index) => {
+      const colunas = linha.split(',');
 
-        setHorarios(dadosFormatados);
-      } catch (erro) {
+      return {
+        id: index + 1,
+        hora: colunas[1]?.trim(),
+        disponivel: colunas[2]?.trim().toUpperCase() === 'TRUE'
+      };
+    });
+
+  setHorarios(dadosFormatados);
+}
+ catch (erro) {
         console.error('Erro ao processar as linhas da planilha:', erro);
       } finally {
         setCarregando(false);
