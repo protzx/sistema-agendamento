@@ -45,10 +45,20 @@ export default function App() {
 
     buscarDados();
   }, []);
-
+const URL_WEB_APP_GOOGLE = "https://script.google.com/macros/s/AKfycbwUUxj0irZxGxc4LzwNRBv21QTU_od1TUwcVnoCA97RUdaQ8N9rRQiBQyRozm1lrA4W/exec"
+const atualizarPlanilhaNa_Nuvem = async (horaEscolhida: string) => {
+  try{ 
+    await fetch(URL_WEB_APP_GOOGLE, {
+      method: "POST",
+      body: JSON.stringify({hora: horaEscolhida})
+    })
+  } catch(erro) {
+    console.error("Erro ao tentar atualizar o status do horário na nuvem", erro)
+  }
+}
   const enviarPedidoWhatsapp = () => {
     if (!servicoSelecionado || !horarioSelecionado) return;
-
+atualizarPlanilhaNa_Nuvem(horarioSelecionado.hora);
     const numeroLoja = '5542999936768';
     const mensagem = `*Novo Agendamento!* 🗓️\n\n` +
       `• *Cliente:* ${nomeCliente}\n` +
