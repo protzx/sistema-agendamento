@@ -82,7 +82,7 @@ backgroundColor: "#0f0e0c",
       borderRadius: '15px',
       boxSizing: 'border-box'
     }}>
-      <h1 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '30px', color: '#B48464' }}>Agendamento Online 🗓️</h1>
+      <h1 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '30px', color: '#B48464' }}>Agendamento Online</h1>
 
     
       <p style={{ fontWeight: 'bold', color: '#9CA3AF' }}>1. Digite seu nome:</p>
